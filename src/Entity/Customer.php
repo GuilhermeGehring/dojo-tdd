@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Exception\InvalidAgeException;
+use App\Exception\InvalidEmailException;
 use App\Exception\InvalidNameException;
 use DateTime;
 
@@ -10,6 +11,7 @@ class Customer
 {
     private $name;
     private $birthDate;
+    private $email;
 
     /**
      * Get the value of name
@@ -55,6 +57,30 @@ class Customer
         }
 
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */
+    public function setEmail(string $email): self
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidEmailException('Invalid E-mail');
+        }
+
+        $this->email = $email;
 
         return $this;
     }

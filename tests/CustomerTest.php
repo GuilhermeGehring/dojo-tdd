@@ -5,6 +5,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use App\Entity\Customer;
 use App\Exception\InvalidAgeException;
+use App\Exception\InvalidEmailException;
 
 class CustomerTest extends TestCase
 {
@@ -43,5 +44,21 @@ class CustomerTest extends TestCase
 
         $this->assertEquals('2001-01-01', $this->customer->getBirthDate());
         $this->assertIsString($this->customer->getBirthDate());
+    }
+
+    public function testIfCustomerEmailIsInvalid()
+    {
+        $this->expectException(InvalidEmailException::class);
+        $this->expectExceptionMessage('Invalid E-mail');
+
+        $this->customer->setEmail('teste');
+    }
+
+    public function testIfCustomerEmailIsValid()
+    {
+        $this->customer->setEmail('teste@email.com');
+
+        $this->assertEquals('teste@email.com', $this->customer->getEmail());
+        $this->assertIsString($this->customer->getEmail());
     }
 }

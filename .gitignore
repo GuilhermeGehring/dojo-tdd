@@ -25,3 +25,4 @@ composer.phar
 phpunit.phar
 
 .theia
+.phpunit.result.cache
