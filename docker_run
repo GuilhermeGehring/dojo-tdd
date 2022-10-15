@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -it --user=1001 dojo-tdd_php_1 $@
